@@ -5,7 +5,12 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgba(204, 204, 204, 0.144);
+}
+
 form {
+  background-color: #fff;
   margin: 0 auto;
   border: 1px solid;
   border-radius: 5px;
@@ -24,7 +29,7 @@ form {
 }
 
 #amount {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .buttons {
@@ -48,7 +53,6 @@ table {
   padding: 5px;
   border-collapse: collapse;
   width: 100%;
-
 }
 
 #cart {
@@ -57,13 +61,14 @@ table {
 }
 
 table th {
+  text-align: left;
+  padding: 2px 5px;
   background-color: rgba(204, 204, 204, 0.562);
 }
 
-table th,
-td {
-  
-    text-align: left;
+table td {
+  background-color: #fff;
+  text-align: left;
   padding: 2px 5px;
 }
 
@@ -73,4 +78,10 @@ td {
 
 #balance {
   margin-top: 15px;
+}
+
+.imageEdit,
+.imageDel {
+  width: 16px;
+  margin: 0 2px;
 }

@@ -6,7 +6,7 @@ const add = document.querySelector("#add");
 const calc = document.querySelector("#calc");
 const cart = document.querySelector("#cart");
 const tbody = document.querySelector("tbody");
-const balance = document.querySelector('#total');
+const balance = document.querySelector("#total");
 const allItens = [];
 let id = 0;
 
@@ -32,6 +32,7 @@ const addProductTable = () => {
     let td_product = tr.insertCell();
     let td_price = tr.insertCell();
     let td_amount = tr.insertCell();
+    let td_action = tr.insertCell();
 
     td_id.innerText = allItens[i].id;
     td_product.innerText = allItens[i].name;
@@ -40,6 +41,18 @@ const addProductTable = () => {
 
     td_id.classList.add("center");
     td_amount.classList.add("center");
+
+    const imgEdit = document.createElement("img");
+    imgEdit.classList.add("imageEdit");
+    imgEdit.src = "./img/edit.png";
+
+    const imgDel = document.createElement("img");
+    imgDel.classList.add("imageDel");
+    imgDel.src = "./img/delete.png";
+
+    td_action.classList.add('center')
+    td_action.appendChild(imgEdit);
+    td_action.appendChild(imgDel);
   }
 };
 
@@ -52,10 +65,9 @@ add.addEventListener("click", () => {
 });
 
 calc.addEventListener("click", () => {
-
   const map = allItens.map((item) => item.amount * item.price); // multiplicar amount pelo preço
 
   const reduce = map.reduce((accumulator, item) => accumulator + item); // somar todos os preços
 
-  balance.innerHTML = `Total: R$ <strong>${reduce.toFixed(2)}</strong>`
+  balance.innerHTML = `Total: R$ <strong>${reduce.toFixed(2)}</strong>`;
 });

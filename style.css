@@ -83,5 +83,11 @@ table td {
 .imageEdit,
 .imageDel {
   width: 16px;
-  margin: 0 2px;
+  margin: 2px 4px;
+  cursor: pointer;
+}
+
+.imageEdit:hover,
+.imageDel:hover { 
+  width: 15px;
 }

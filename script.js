@@ -49,6 +49,12 @@ const addProductTable = () => {
     const imgDel = document.createElement("img");
     imgDel.classList.add("imageDel");
     imgDel.src = "./img/delete.png";
+    
+    imgDel.addEventListener('click', ()  => {
+      let i = td_id.innerHTML - 1
+      allItens.splice(i, 1);
+      tbody.deleteRow(i);
+    })
 
     td_action.classList.add('center')
     td_action.appendChild(imgEdit);

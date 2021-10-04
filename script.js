@@ -8,6 +8,7 @@ const cart = document.querySelector("#cart");
 const tbody = document.querySelector("tbody");
 const balance = document.querySelector("#total");
 const allItens = [];
+let editId = null;
 
 const addProduct = () => {
   const item = {};
@@ -45,13 +46,11 @@ const addProductTable = () => {
     imgEdit.classList.add("imageEdit");
     imgEdit.src = "./img/edit.png";
 
-    imgEdit.addEventListener("click", () => {
-      product.value = allItens[i].name;
-      amount.value = allItens[i].amount;
-      price.value = allItens[i].price;
-      add.value = "Editar";
-    });
-    console.log(i);
+    //set click attribute to the imgEdit and dynamically put the 'id' to the attribute function
+    imgEdit.setAttribute(
+      "onclick",
+      `editField(${JSON.stringify(allItens[i])})`
+    );
 
     //create delete icon
     const imgDel = document.createElement("img");
@@ -67,6 +66,24 @@ const addProductTable = () => {
   }
 };
 
+const editField = (data) => {
+  product.value = data.name;
+  amount.value = data.amount;
+  price.value = data.price;
+  editId = data.id;
+  add.value = "Editar";
+};
+
+const editArray = (id, data) => {
+  for (let i = 0; i < allItens.length; i++) {
+    if (allItens[i].id == id) {
+      allItens[i].name = data.name;
+      allItens[i].amount = data.amount;
+      allItens[i].price = data.price;
+    }
+  }
+};
+
 const deleteItem = (id) => {
   for (let i = 0; i < allItens.length; i++) {
     if (allItens[i].id == id) {
@@ -77,19 +94,28 @@ const deleteItem = (id) => {
   console.log(allItens);
 };
 
-//add product on click
-add.addEventListener("click", () => {
-  add.value = "Adicionar";
-
-  allItens.push(addProduct());
-
-  addProductTable();
-  console.log(allItens);
-
-  //reset values after you add a new product
+//reset input values
+const resetValues = () => {
   product.value = "";
   amount.value = "";
   price.value = "";
+};
+
+//add product on click
+add.addEventListener("click", () => {
+  //verify if it's a edit or a new obj
+  if (add.value == "Editar") {
+    editArray(editId, addProduct());
+    add.value = "Adicionar";
+  }
+
+  //add a new obj to the array
+  else allItens.push(addProduct());
+
+  addProductTable();
+
+  //reset values after you add a new product
+  resetValues();
 });
 
 calc.addEventListener("click", () => {
@@ -99,5 +125,6 @@ calc.addEventListener("click", () => {
   //sum all values
   const reduce = map.reduce((accumulator, item) => accumulator + item);
 
+  //show the final price
   balance.innerHTML = `Total: R$ <strong>${reduce.toFixed(2)}</strong>`;
 });

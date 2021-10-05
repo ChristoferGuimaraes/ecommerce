@@ -65,7 +65,7 @@ const addProductTable = () => {
     td_action.appendChild(imgDel);
   }
 };
-
+ 
 const editField = (data) => {
   product.value = data.name;
   amount.value = data.amount;
@@ -103,14 +103,19 @@ const resetValues = () => {
 
 //add product on click
 add.addEventListener("click", () => {
+  if (product.value == "" || amount.value == "" || price.value == "") {
+    alert('Por favor, não deixe nenhum campo em branco');
+    return
+  }
   //verify if it's a edit or a new obj
   if (add.value == "Editar") {
     editArray(editId, addProduct());
     add.value = "Adicionar";
-  }
-
+  } else
+  
   //add a new obj to the array
-  else allItens.push(addProduct());
+  allItens.push(addProduct());
+
 
   addProductTable();
 

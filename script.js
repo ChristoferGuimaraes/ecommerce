@@ -84,6 +84,7 @@ const editArray = (id, data) => {
   }
 };
 
+//delete a element from array and table
 const deleteItem = (id) => {
   for (let i = 0; i < allItens.length; i++) {
     if (allItens[i].id == id) {
@@ -91,7 +92,6 @@ const deleteItem = (id) => {
       tbody.deleteRow(i);
     }
   }
-  console.log(allItens);
 };
 
 //reset input values
@@ -101,12 +101,22 @@ const resetValues = () => {
   price.value = "";
 };
 
+//verify if inputs is not empty
+const verifyInputs = () => {
+
+  if (product.value == "" || amount.value == "" || price.value == "") {
+    alert('Por favor, não deixe nenhum campo em branco.');
+    return true
+  }
+
+}
+
 //add product on click
 add.addEventListener("click", () => {
-  if (product.value == "" || amount.value == "" || price.value == "") {
-    alert('Por favor, não deixe nenhum campo em branco');
+  if (verifyInputs()) {
     return
   }
+  
   //verify if it's a edit or a new obj
   if (add.value == "Editar") {
     editArray(editId, addProduct());
@@ -116,7 +126,7 @@ add.addEventListener("click", () => {
   //add a new obj to the array
   allItens.push(addProduct());
 
-
+  //create all the table elements
   addProductTable();
 
   //reset values after you add a new product
